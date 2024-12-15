@@ -37,7 +37,7 @@ MONODEPTHFINAL/
 > 4. ```pip install pandas opencv-python numpy tqdm matplotlib```
 > 5. ```pip install flask```
 > 6. ```git clone https://github.com/choimagon/monodepthFinal.git```
-<br>
+
 > #### 모델 학습하기
 > 1. FinalTrain 폴더를 들어간다
 > 2. data 파일을 위 데이터셋 주소에서 다운받아서 위 폴더구조에 맞게 배치한다.
