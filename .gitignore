@@ -1,0 +1,7 @@
+FinalTrain/__pycache__
+FinalTrain/data
+
+FinalWeb/__pycache__
+*.pth
+
+.DS_Store

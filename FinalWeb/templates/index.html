@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D 모델 생성기</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        .image-container {
+            max-width: 150px;
+            margin: 0 auto;
+        }
+        .image-container img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .image-container button {
+            margin-top: 10px;
+        }
+        #uploaded-list {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        #loading-spinner {
+            display: none;
+            margin-top: 20px;
+        }
+        #generated-content {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            gap: 20px;
+        }
+        #generated-content img, #generated-content video {
+            max-width: 40%; /* 가로 공간의 45% 사용 */
+            height: auto;
+        }
+        #no-image-message {
+            font-size: 18px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">3D 모델 생성기</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data" class="mt-4 d-flex align-items-center">
+            <div class="me-3 flex-grow-1">
+                <label for="file" class="form-label visually-hidden">파일 선택</label>
+                <input type="file" name="file" id="file" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary" id="upload-btn" disabled>업로드</button>
+        </form>
+        <div class="mt-4">
+            <h3>업로드된 목록</h3>
+            <div id="uploaded-list">
+                <div class="row">
+                    {% for file in files %}
+                    <div class="col-md-3 text-center">
+                        <div class="image-container">
+                            <img src="{{ url_for('static', filename='uploads/' ~ file) }}" alt="{{ file }}">
+                            <button class="btn btn-danger btn-sm delete-btn" data-filename="{{ file }}">삭제</button>
+                            <button class="btn btn-success btn-sm generate-btn" data-filename="{{ file }}">생성</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div id="loading-spinner" class="text-center">
+            <div class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p>이미지 및 영상을 생성 중입니다. (평균 1분30초 소요)잠시만 기다려주세요...</p>
+        </div>
+        <div id="generated-content" class="mt-4">
+            <img id="result-image" src="" alt="생성된 이미지" class="img-fluid" style="display: none;">
+            <video id="result-video" controls autoplay loop style="display: none;">
+                <source src="" type="video/mp4">
+                브라우저에서 비디오를 지원하지 않습니다.
+            </video>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            // 파일 입력 변경 이벤트로 버튼 활성화/비활성화
+            $('#file').on('change', function() {
+                const fileInput = $(this);
+                const uploadBtn = $('#upload-btn');
+                if (fileInput.val()) {
+                    uploadBtn.prop('disabled', false);
+                } else {
+                    uploadBtn.prop('disabled', true);
+                }
+            });
+
+            // 파일 삭제 요청
+            $('.delete-btn').on('click', function() {
+                const filename = $(this).data('filename');
+                $.ajax({
+                    url: '/delete/' + filename,
+                    type: 'POST',
+                    success: function(response) {
+                        alert('파일이 삭제되었습니다.');
+                        location.reload();
+                    },
+                    error: function() {
+                        alert('파일 삭제 중 오류가 발생했습니다.');
+                    }
+                });
+            });
+
+            // 생성 버튼 클릭 이벤트
+            $('.generate-btn').on('click', function() {
+                const filename = $(this).data('filename');
+                const spinner = $('#loading-spinner');
+                const resultImage = $('#result-image');
+                const resultVideo = $('#result-video');
+
+                // 버튼 비활성화 및 로딩바 표시
+                spinner.show();
+                resultImage.hide();
+                resultVideo.hide();
+
+                // AJAX 요청
+                $.ajax({
+                    url: '/generate/' + filename,
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.success) {
+                            if (response.image_url) {
+                                resultImage.attr('src', response.image_url).show();
+                            }
+                            if (response.animation_url) {
+                                resultVideo.find('source').attr('src', response.animation_url);
+                                resultVideo[0].load(); // 새로 로드
+                                resultVideo.show();
+                            }
+                            alert('이미지 및 비디오가 생성되었습니다.');
+                        }
+                    },
+                    error: function() {
+                        alert('생성 중 오류가 발생했습니다.');
+                    },
+                    complete: function() {
+                        spinner.hide();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
