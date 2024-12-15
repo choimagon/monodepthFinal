@@ -34,6 +34,8 @@ MONODEPTHFINAL/
 > 2. data 파일을 위 데이터셋 주소에서 다운받아서 위 폴더구조에 맞게 배치한다.
 > 3. ```python runTrain.py```를 실행한다.
 <br> vram 31기가 잡아먹음.
+
+<br>
 > 웹사이트 구동
 > 1. FinalWeb 폴더를 들어간다
 > 2. 학습한 가중치 불러오기(modelpth파일에 넣기)
