@@ -30,7 +30,7 @@ MONODEPTHFINAL/
 
 ### 사용방법
 > #### 환경설정
-> 기본 환경 cuda 11.8
+> 기본 환경 cuda 11.8 / 리눅스 20.04 
 > 1. ```conda create -n myenv python=3.8 -y```
 > 2. ```conda activate myenv```
 > 3. ```pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118```
