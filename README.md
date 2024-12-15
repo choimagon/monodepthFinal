@@ -32,5 +32,5 @@ MONODEPTHFINAL/
 > 웹사이트 구동
 > 1. FinalWeb 폴더를 들어간다
 > 2. 학습한 가중치 불러오기(modelpth파일에 넣기)
-> 3. ```python app.py```
-> 이미지를 업로드 한 후 생성 버튼을 누른다.
+> 3. ```python app.py``` 
+<br>이미지를 업로드 한 후 생성 버튼을 누른다.
