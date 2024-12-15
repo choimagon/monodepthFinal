@@ -4,6 +4,7 @@
 데이터셋 : https://www.kaggle.com/datasets/soumikrakshit/nyu-depth-v2
 ![image](https://github.com/user-attachments/assets/826f103d-4347-4dc4-b2e9-66f3009636a0)
 
+### 폴더 구조
 ```
 MONODEPTHFINAL/
 │
@@ -15,14 +16,21 @@ MONODEPTHFINAL/
 │   └── runTrain.py         -> train 코드
 │
 ├── FinalWeb/
-│   ├── modelpth/
-│   ├── static/
+│   ├── modelpth/    -> 학습 후 가중치는 여기 둘것
+│   ├── static/          
 │   ├── templates/
-│   ├── app.py
+│   ├── app.py          -> 모델 가중치 여기서 바꿀수있음
 │   ├── image_processor.py -> 개량 DoG 코드
-│   ├── model.py           -> 모델 코드
+│   ├── model.py           -> 모델 코드 
 │   ├── process_image.py 
 │   └── visualizer.py
 │
 └── .gitignore
 ```
+
+### 사용방법
+> 웹사이트 구동
+> 1. FinalWeb 폴더를 들어간다
+> 2. 학습한 가중치 불러오기(modelpth파일에 넣기)
+> 3. ```python app.py```
+> 이미지를 업로드 한 후 생성 버튼을 누른다.
