@@ -29,10 +29,6 @@ MONODEPTHFINAL/
 ```
 
 ### 사용방법
-conda create -n myenv python=3.8 -y
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
-pip install pandas opencv-python numpy tqdm matplotlib
-pip install matplotlib
 > #### 환경설정
 > 기본 환경 cuda 11.8
 > 1. ```conda create -n myenv python=3.8 -y```
@@ -48,7 +44,8 @@ pip install matplotlib
 <br> vram 31기가 잡아먹음.
 
 > #### 웹사이트 구동
+> 학습된 가중치 : https://drive.google.com/file/d/1DCw0LiPB0MNm969YM7eKAeyzdPZcU7_G/view?usp=drive_link
 > 1. FinalWeb 폴더를 들어간다
-> 2. 학습한 가중치 불러오기(modelpth파일에 넣기)
+> 2. 학습된 가중치 modelpth파일에 넣기
 > 3. ```python app.py``` 를 실행한다.
 <br>이미지를 업로드 한 후 생성 버튼을 누른다.
