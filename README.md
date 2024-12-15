@@ -29,6 +29,18 @@ MONODEPTHFINAL/
 ```
 
 ### 사용방법
+conda create -n myenv python=3.8 -y
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+pip install pandas opencv-python numpy tqdm matplotlib
+pip install matplotlib
+> #### 환경설정
+> 기본 환경 cuda 11.8 
+> 1. ```conda create -n myenv python=3.8 -y```
+> 2. ```conda activate myenv```
+> 3. ```pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118```
+> 4. ```pip install pandas opencv-python numpy tqdm matplotlib```
+> 5. ```pip install flask```
+
 > #### 모델 학습하기
 > 1. FinalTrain 폴더를 들어간다
 > 2. data 파일을 위 데이터셋 주소에서 다운받아서 위 폴더구조에 맞게 배치한다.
