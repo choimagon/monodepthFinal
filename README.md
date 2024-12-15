@@ -34,7 +34,7 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 pip install pandas opencv-python numpy tqdm matplotlib
 pip install matplotlib
 > #### 환경설정
-> 기본 환경 cuda 11.8 
+> 기본 환경 cuda 11.8
 > 1. ```conda create -n myenv python=3.8 -y```
 > 2. ```conda activate myenv```
 > 3. ```pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118```
